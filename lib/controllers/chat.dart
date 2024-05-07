@@ -16,6 +16,8 @@ class ChatController extends GetxController {
   final favLoad = false.obs;
   final loadScreen = false.obs;
   final webLoad = false.obs;
+  final isFavorite = true.obs;
+  final isEnable = true.obs;
   final _box = GetStorage();
   final chats = <ChatModel>[].obs;
   final messages = <MessageModel>[].obs;
@@ -24,9 +26,6 @@ class ChatController extends GetxController {
   final chatMessages = <String>[].obs;
   String chatID = "";
   final conversationName = "".obs;
-
-  // Favorite section
-  final isFavorite = true.obs;
 
   // Delete user data (Chats, Messages and Favorites)
   Future<void> deleteUserData() async {
@@ -40,10 +39,9 @@ class ChatController extends GetxController {
       conversationName.value = "";
       chatID = "";
       messages.clear();
+      isEnable.value = true;
       await getChats();
       await getFavorites();
-
-
     } catch (error) {
       if (error is DioException) {
         ExceptionHandler.handler(error.response?.statusCode ?? 0);
@@ -93,7 +91,6 @@ class ChatController extends GetxController {
         ExceptionHandler.defaultHandler();
       }
     }
-
   }
 
   Future<void> removeFavorite() async {
@@ -110,7 +107,6 @@ class ChatController extends GetxController {
       } else {
         ExceptionHandler.defaultHandler();
       }
-
     }
   }
 
@@ -282,9 +278,9 @@ class ChatController extends GetxController {
     setLoadScreen();
   }
 
-  void newWebChat()
-  {
+  void newWebChat() {
     setLoad();
+    isEnable.value = true;
     isFavorite.value = false;
     chatMessages.clear();
     conversationName.value = "";
@@ -310,6 +306,7 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     getChats();
+    isEnable.value = true;
     super.onInit();
   }
 }

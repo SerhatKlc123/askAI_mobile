@@ -20,7 +20,7 @@ class WebSplashScreen extends StatelessWidget {
         body: Center(
           child: AnimatedSplashScreen(
             splash: 'assets/images/logo.png',
-            duration: 1,
+            duration: 2000,
             centered: true,
             splashIconSize: 200.r,
             nextScreen: _box.read("web-page") == 1 ? WebHome() : WebAuthBase()

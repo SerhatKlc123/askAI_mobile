@@ -1,3 +1,4 @@
+import 'package:ask_ai/controllers/auth.dart';
 import 'package:ask_ai/controllers/chat.dart';
 import 'package:ask_ai/controllers/navbar.dart';
 import 'package:get/get.dart';
@@ -13,9 +14,10 @@ class SettingsController extends GetxController {
     _box.remove("token");
     _box.remove("email");
     _box.write("page", 1);
-    Get.toNamed("/mobile-register");
+    Get.delete<AuthController>();
     Get.delete<NavbarController>();
     Get.delete<ChatController>();
+    Get.toNamed("/mobile-register");
   }
 
   void webSignOut() {
@@ -26,6 +28,7 @@ class SettingsController extends GetxController {
     _box.remove("web-page");
     Get.delete<NavbarController>();
     Get.delete<ChatController>();
+    Get.delete<AuthController>();
     Get.delete();
     Get.toNamed("/");
   }

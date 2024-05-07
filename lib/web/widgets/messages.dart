@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import '../../utils/colors.dart';
 
 class WebSystemMessage extends StatelessWidget {
-  WebSystemMessage({Key? key, required this.answer}) : super(key: key);
+  const WebSystemMessage({Key? key, required this.answer}) : super(key: key);
   final String answer;
   @override
   Widget build(BuildContext context) {
@@ -46,9 +46,8 @@ class WebSystemMessage extends StatelessWidget {
 }
 
 class WebUserMessage extends StatelessWidget {
-  WebUserMessage({Key? key, required this.answer}) : super(key: key);
+  const WebUserMessage({Key? key, required this.answer}) : super(key: key);
   final String answer;
-  final _platform = Get.find<PlatformController>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +86,7 @@ class WebUserMessage extends StatelessWidget {
 
 
 class WebSystemLoad extends StatelessWidget {
-  WebSystemLoad({Key? key}) : super(key: key);
-  final _platform = Get.find<PlatformController>();
+  const WebSystemLoad({Key? key}) : super(key: key);
 
 
   @override
@@ -100,7 +98,7 @@ class WebSystemLoad extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-              radius: 20.r,
+              radius: 25.r,
               backgroundColor: black,
               child: LottieBuilder.asset(
                 "assets/animations/ob1.json",
@@ -109,11 +107,11 @@ class WebSystemLoad extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 10.w),
             child: Container(
-                width: _platform.isTablet() ? 35.w : 45.w,
+                width: 47.w,
                 decoration: BoxDecoration(
                     color: baseColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(10.r)),
-                child: LottieBuilder.asset("assets/animations/circular_load.json", height: 45.h,)
+                child: LottieBuilder.asset("assets/animations/circular_load.json", height:50.h,)
             ),
           )
         ],

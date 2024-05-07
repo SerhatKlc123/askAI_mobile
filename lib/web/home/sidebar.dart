@@ -43,6 +43,7 @@ class SideBar extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 25.w),
                           child: ListTile(
                             onTap: () {
+                              _chat.isEnable.value = true;
                               _chat.isFavorite.value =
                                   _chat.chats[i].favorite ?? false;
                               _chat.chatID = _chat.chats[i].id ?? "";
@@ -144,16 +145,33 @@ class SideBar extends StatelessWidget {
                                             height: 1.h,
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 30.w,)  + EdgeInsets.only(top: 20.h),
+                                            padding: EdgeInsets.symmetric(
+                                                  horizontal: 30.w,
+                                                ) +
+                                                EdgeInsets.only(top: 20.h),
                                             child: Row(
                                               children: [
-                                              Text("Conversation Name", style: monserratMedium.copyWith(color: Colors.white, fontSize: 20.h),),
-                                              const Spacer(),
-                                              Text("Added At", style: monserratMedium.copyWith(color: Colors.white, fontSize: 20.h),),
+                                                Text(
+                                                  "Conversation Name",
+                                                  style:
+                                                      monserratMedium.copyWith(
+                                                          color: Colors.white,
+                                                          fontSize: 20.h),
+                                                ),
                                                 const Spacer(),
-                                                SizedBox(width: 200.w,)
-
-                                            ],),
+                                                Text(
+                                                  "Added At",
+                                                  style:
+                                                      monserratMedium.copyWith(
+                                                          color: Colors.white,
+                                                          fontSize: 20.h),
+                                                ),
+                                                const Spacer(),
+                                                SizedBox(
+                                                  width: 200.w,
+                                                )
+                                              ],
+                                            ),
                                           ),
                                           Expanded(
                                             child: SingleChildScrollView(
@@ -165,25 +183,90 @@ class SideBar extends StatelessWidget {
                                                       GestureDetector(
                                                           child: Container(
                                                     padding:
-                                                        EdgeInsets.symmetric(horizontal: 30.w),
-                                                     child: Row(
-                                                       children: [
-                                                         Expanded(child: Text(_chat.favoriteChats[i].conversationName ?? "", style: monserratMedium.copyWith(color: Colors.white, fontSize: 19.sp), maxLines: 1,overflow: TextOverflow.ellipsis,)),
-                                                         Expanded(child: Text(_chat.formatDate(_chat.favoriteChats[i].added ?? ""), style: monserratMedium.copyWith(color: Colors.white, fontSize: 19.sp), maxLines: 1,overflow: TextOverflow.ellipsis,)),
-                                                         IconButton(onPressed: (){
-                                                           Navigator.of(ctx).pop();
-                                                          _chat.getWebMessages(_chat.favoriteChats[i].chatId ?? "");
-                                                         },
-                                                           icon: Icon(Icons.remove_red_eye_outlined, size: 25.r, color: Colors.white,),splashRadius: 25.r,
-                                                         ),
-                                                         IconButton(onPressed: (){
-                                                           _chat.chatID = _chat.favoriteChats[i].chatId ?? "";
-                                                           _chat.removeFavorite().then((value) => _chat.getFavorites().then((value) => _chat.getWebChats()));
-                                                         },
-                                                         icon: Icon(Icons.delete, size: 25.r, color: Colors.white,),splashRadius: 25.r,
-                                                         ),
-                                                       ],
-                                                     ),
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 30.w),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                            child: Text(
+                                                          _chat.favoriteChats[i]
+                                                                  .conversationName ??
+                                                              "",
+                                                          style: monserratMedium
+                                                              .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      17.sp),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        )),
+                                                        Expanded(
+                                                            child: Text(
+                                                          _chat.formatDate(_chat
+                                                                  .favoriteChats[
+                                                                      i]
+                                                                  .added ??
+                                                              ""),
+                                                          style: monserratMedium
+                                                              .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      17.sp),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        )),
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            Navigator.of(ctx)
+                                                                .pop();
+                                                            _chat.isEnable
+                                                                .value = false;
+                                                            _chat.getWebMessages(
+                                                                _chat.favoriteChats[i]
+                                                                        .chatId ??
+                                                                    "");
+                                                          },
+                                                          icon: Icon(
+                                                            Icons
+                                                                .remove_red_eye_outlined,
+                                                            size: 25.r,
+                                                            color: Colors.white,
+                                                          ),
+                                                          splashRadius: 25.r,
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            _chat.chatID = _chat
+                                                                    .favoriteChats[
+                                                                        i]
+                                                                    .chatId ??
+                                                                "";
+                                                            _chat
+                                                                .removeFavorite()
+                                                                .then((value) => _chat
+                                                                    .getFavorites()
+                                                                    .then((value) =>
+                                                                        _chat
+                                                                            .getWebChats()));
+                                                            !_chat.isEnable
+                                                                    .value
+                                                                ? _chat
+                                                                    .newWebChat()
+                                                                : null;
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.delete,
+                                                            size: 25.r,
+                                                            color: Colors.white,
+                                                          ),
+                                                          splashRadius: 25.r,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   )),
                                                   itemCount: _chat
                                                       .favoriteChats.length,

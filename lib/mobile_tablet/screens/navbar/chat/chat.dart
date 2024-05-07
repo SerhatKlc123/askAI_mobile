@@ -94,7 +94,7 @@ class ChatScreen extends StatelessWidget {
                                         "Welcome to Ask AI chat experience! Get ready to explore the endless possibilities of conversation with our intelligent virtual assistant."),
                               ),
                               ListView.builder(
-                                reverse: true,
+                                reverse: false,
                                 itemBuilder: (_, i) => Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
