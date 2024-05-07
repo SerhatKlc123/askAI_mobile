@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 
 class MobileLoginScreen extends StatelessWidget {
   MobileLoginScreen({Key? key}) : super(key: key);
-  final _auth = Get.find<AuthController>();
+  final _auth = Get.put(AuthController());
   final _platform = Get.find<PlatformController>();
   final _email = TextEditingController();
   final _password = TextEditingController();
