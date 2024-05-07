@@ -112,7 +112,7 @@ class MobileRenewScreen extends StatelessWidget {
                                                             _password.text)
                                                         .then((value) => _auth
                                                                 .isSuccess.value
-                                                            ? Get.offAndToNamed(
+                                                            ? Get.toNamed(
                                                                 "/mobile-login")
                                                             : null),
                                                     backgroundColor: baseColor,
